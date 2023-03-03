@@ -9,7 +9,7 @@ const ProductsList = () => {
       products.map(prod => (
         <div key={prod.id} className=' bg-orange-100 rounded w-64 h-96 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-transform'>
           <figure>
-            <img src={prod.img} className='h-60 w-64 object-cover rounded' />
+            <img src={prod.img} title={prod.name} className='h-60 w-64 object-cover rounded' />
           </figure>
           <figcaption className='flex flex-col justify-around items-center'>
             <h3 className=' text-orange-500 text-xl'>{prod.name}</h3>

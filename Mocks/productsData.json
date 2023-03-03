@@ -5,7 +5,8 @@
         "img": "../assets/rol1.jpg",
         "price": 19,
         "unid": "x 4 Rolls",
-        "cant": 1
+        "cant": 1,
+        "category": "roles"
     },
     {
         "id": 2,
@@ -13,7 +14,8 @@
         "img": "../assets/rol2.jpg",
         "price": 22,
         "unid": "x 6 Rolls",
-        "cant": 1
+        "cant": 1,
+        "category": "roles"
     },
     {
         "id": 3,
@@ -21,7 +23,9 @@
         "img": "../assets/pan-de-jamón.jpg",
         "price": 15,
         "unid": "x 1 unid",
-        "cant": 1
+        "cant": 1,
+        "category": "panaderia"
+
     },
     {
         "id": 4,
@@ -29,15 +33,18 @@
         "img": "../assets/golfeado.jpg",
         "price": 20,
         "unid": "x 4 Rolls",
-        "cant": 1
+        "cant": 1,
+        "category": "panaderia"
+
     },
     {
         "id": 5,
         "name": "Cupcake",
         "img": "../assets/cupcake.jpg",
         "price": 26,
-        "unid": "x 6 Rolls",
-        "cant": 1
+        "unid": "x 6 cupcakes",
+        "cant": 1,
+        "category": "tortasYCupcakes"
     },
     {
         "id": 6,
@@ -45,6 +52,7 @@
         "img": "../assets/tortarol.jpg",
         "price": 25,
         "unid": "x 1 unid",
-        "cant": 1
+        "cant": 1,
+        "category": "tortasYCupcakes"
     }
 ]
