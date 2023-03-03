@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai'
 
-const Counter = () => {
+const Counter = ({ prodKey }) => {
   const [contador, setContador] = useState(0)
 
   if (contador === 0) {
