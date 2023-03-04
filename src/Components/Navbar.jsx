@@ -1,6 +1,6 @@
 import React from 'react'
-import { AiOutlineShoppingCart } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
+import CartWidget from './CartWidget'
 
 const Navbar = () => {
   return (
@@ -14,7 +14,7 @@ const Navbar = () => {
         <Link to='/category/panaderia' className='text-2xl hover:text-orange-400 hover:rotate-3 transition-all'>Panaderia</Link>
         <Link to='/category/tortasYCupcakes' className='text-2xl hover:text-orange-400 hover:rotate-3 transition-all'>Tortas y cupcakes</Link>
       </nav>
-      <button><AiOutlineShoppingCart className='h-auto w-12 hover:text-orange-400 text-gray-500' /></button>
+      <CartWidget />
     </div>
   )
 }
