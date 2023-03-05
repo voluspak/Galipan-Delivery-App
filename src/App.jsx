@@ -8,10 +8,10 @@ const App = () => {
   return (
     <BrowserRouter className='w-screen'>
       <CartProvider>
-        <header>
+        <header className=' mb-40'>
           <Navbar />
         </header>
-        <main className='grid place-items-center gap-5 mt-5'>
+        <main className='grid place-items-center gap-5 mt-5 mb-5'>
           <h1 className='text-2xl font-bold text-orange-600'>Delivery</h1>
           <Routes>
             <Route path='/' element={<ListContainer />} />

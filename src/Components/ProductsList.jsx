@@ -20,7 +20,7 @@ const ProductsList = () => {
   useEffect(() => getProducts(), [])
   useEffect(() => getProducts(), [category])
   return (
-    <section className=' w-4/5 grid grid-cols-autoFit gap-5'>
+    <section className=' w-4/5 grid grid-cols-autoFit gap-5 place-items-center'>
       {
       prods.map(prod => (
         <div key={prod.id} className=' bg-orange-100 rounded w-64 h-96 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-transform'>
@@ -33,7 +33,7 @@ const ProductsList = () => {
               <span> {prod.unid}</span>
             </span>
             <span className='font-bold'>+ Delivery</span>
-            <Counter prodKey={prod.id} />
+            <Counter prod={prod} />
           </figcaption>
         </div>
       ))

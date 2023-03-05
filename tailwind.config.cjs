@@ -8,6 +8,10 @@ module.exports = {
     extend: {
       gridTemplateColumns: {
         autoFit: 'repeat(auto-fit, minmax(250px, 1fr))'
+      },
+      spacing: {
+        34: '8.45rem',
+        18: '70px'
       }
     }
   },

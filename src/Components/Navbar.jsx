@@ -4,7 +4,7 @@ import CartWidget from './CartWidget'
 
 const Navbar = () => {
   return (
-    <div className=' w-4/5 flex container justify-around items-center mx-auto shadow-md'>
+    <div className='fixed top-0 z-10 left-16 md:left-20 lg:left-34 bg-white w-4/5 flex container justify-around items-center shadow-md'>
       <Link to='' className='cursor-pointer'>
         <img src='./assets/Logo.jpg' title='Logo' className='h-auto w-56' />
       </Link>
