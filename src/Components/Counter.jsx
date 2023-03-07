@@ -4,15 +4,15 @@ import { CartContext } from '../Context/cartContext'
 
 const Counter = ({ prod }) => {
   const [contador, setContador] = useState(0)
-  const { addToCart, removeItem } = useContext(CartContext)
+  const { addToCart, removeOneFromCart } = useContext(CartContext)
 
   function sumHandle () {
     setContador(contador + 1)
-    addToCart(prod, contador)
+    addToCart(prod)
   }
   function minusHandle () {
     setContador(contador - 1)
-    removeItem(prod, contador)
+    removeOneFromCart(prod)
   }
 
   if (contador === 0) {
