@@ -1,10 +1,10 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai'
-import { CartContext } from '../Context/cartContext'
+import { useCart } from '../Hooks/useCart'
 
 const Counter = ({ prod }) => {
   const [contador, setContador] = useState(0)
-  const { addToCart, removeOneFromCart } = useContext(CartContext)
+  const { addToCart, removeOneFromCart } = useCart()
 
   function sumHandle () {
     setContador(contador + 1)

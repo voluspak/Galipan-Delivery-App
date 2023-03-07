@@ -1,9 +1,9 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
-import { CartContext } from '../Context/cartContext'
+import { useCart } from '../Hooks/useCart'
 
 const CartWidget = () => {
-  const { cart } = useContext(CartContext)
+  const { cart } = useCart()
   const [total, setTotal] = useState(0)
 
   useEffect(() => {
