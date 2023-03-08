@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react'
 import Counter from './Counter'
 import products from '../Mocks/productsData.json'
 import { useParams } from 'react-router-dom'
-// import ModalItemDetail from './ModalItemDetail'
+import { useCart } from '../Hooks/useCart'
 
 const ProductsList = () => {
   const [prods, setProds] = useState([])
   const { category } = useParams()
+  const { cart, addToCart, removeOneFromCart } = useCart()
 
   function getProducts () {
     if (category) {
@@ -33,7 +34,9 @@ const ProductsList = () => {
               <span> {prod.unid}</span>
             </span>
             <span className='font-bold'>+ Delivery</span>
-            <Counter prod={prod} />
+            <Counter
+              {...prod} addToCart={() => addToCart(prod)} removeOneFromCart={() => removeOneFromCart(prod)} cart={cart}
+            />
           </figcaption>
         </div>
       ))
