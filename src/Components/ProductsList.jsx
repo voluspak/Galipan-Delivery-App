@@ -1,28 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Counter from './Counter'
-import products from '../Mocks/productsData.json'
-import { useParams } from 'react-router-dom'
+// import products from '../Mocks/productsData.json'
 import { useCart } from '../Hooks/useCart'
+import useProducts from '../Hooks/useProducts'
+import Loader from './Loader'
 
 const ProductsList = () => {
-  const [prods, setProds] = useState([])
-  const { category } = useParams()
   const { cart, addToCart, removeOneFromCart } = useCart()
+  const { prods } = useProducts()
 
-  function getProducts () {
-    if (category) {
-      const filteredProd = products.filter(prod => prod.category === category)
-      setProds(filteredProd)
-    } else {
-      setProds(products)
-    }
-  }
-
-  useEffect(() => getProducts(), [])
-  useEffect(() => getProducts(), [category])
-  return (
-    <section className=' w-4/5 grid grid-cols-autoFit gap-5 place-items-center'>
-      {
+  if (!prods) {
+    return <Loader />
+  } else {
+    return (
+      <section className=' w-4/5 grid grid-cols-autoFit gap-5 place-items-center'>
+        {
       prods.map(prod => (
         <div key={prod.id} className=' bg-orange-100 rounded w-64 h-96 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-transform'>
           <figure>
@@ -41,8 +33,9 @@ const ProductsList = () => {
         </div>
       ))
     }
-    </section>
-  )
+      </section>
+    )
+  }
 }
 
 export default ProductsList
