@@ -1,0 +1,61 @@
+import React from 'react'
+import { useCart } from '../Hooks/useCart'
+import { RiDeleteBin5Line } from 'react-icons/ri'
+
+const CartItem = () => {
+  const { addToCart, removeOneFromCart, deleteFromCart, cart } = useCart()
+  return (
+    <>
+      <table className='w-full md:table-auto table-fixed text-center'>
+        <thead>
+          <tr>
+            <th> </th>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Total</th>
+            <th> </th>
+          </tr>
+        </thead>
+        <tbody>
+          {cart.map(prod => (
+            <tr key={prod.id} className='border-y my-1 py-2 even:bg-gray-50'>
+              <td>
+                <img src={prod.img} className='mx-auto border-2 border-opacity-50 border-orange-500 rounded-full w-32 h-32 object-cover' />
+              </td>
+              <td>
+                <span>{prod.name}</span>
+              </td>
+              <td>
+                COP{prod.price}K
+              </td>
+              <td>
+                <button onClick={removeOneFromCart} className='p-2 font-bold text-2xl text-red-700 active:text-red-500'>-</button>
+                <span>{prod.cant}</span>
+                <button onClick={addToCart} className='p-2 font-bold text-green-700 active:text-green-500 text-lg'>+</button>
+              </td>
+              <td>
+                <span>COP{prod.price}K</span>
+              </td>
+              <td>
+                <button onClick={deleteFromCart} className='p-2 text-2xl text-red-700 active:text-red-500'><RiDeleteBin5Line /></button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td><strong>CANT TOTAL</strong></td>
+            <td><strong>TOTAL</strong></td>
+            <td> </td>
+          </tr>
+        </tfoot>
+      </table>
+    </>
+  )
+}
+
+export default CartItem
