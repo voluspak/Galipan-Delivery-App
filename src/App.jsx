@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from './Components/Navbar'
-import ListContainer from './Components/ProductsList'
+import ListContainer from './Components/ListContainer'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import CartProvider from './Context/CartProvider'
 import ModalCart from './Components/ModalCart'

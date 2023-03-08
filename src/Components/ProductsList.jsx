@@ -1,20 +1,13 @@
 import React from 'react'
 import Counter from './Counter'
-// import products from '../Mocks/productsData.json'
 import { useCart } from '../Hooks/useCart'
-import useProducts from '../Hooks/useProducts'
-import Loader from './Loader'
 
-const ProductsList = () => {
+const ProductsList = ({ prods }) => {
   const { cart, addToCart, removeOneFromCart } = useCart()
-  const { prods } = useProducts()
 
-  if (!prods) {
-    return <Loader />
-  } else {
-    return (
-      <section className=' w-4/5 grid grid-cols-autoFit gap-5 place-items-center'>
-        {
+  return (
+    <section className=' w-4/5 grid grid-cols-autoFit gap-5 place-items-center'>
+      {
       prods.map(prod => (
         <div key={prod.id} className=' bg-orange-100 rounded w-64 h-96 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-transform'>
           <figure>
@@ -33,9 +26,8 @@ const ProductsList = () => {
         </div>
       ))
     }
-      </section>
-    )
-  }
+    </section>
+  )
 }
 
 export default ProductsList
