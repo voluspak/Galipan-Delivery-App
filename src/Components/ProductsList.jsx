@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Counter from './Counter'
-import products from '../../Mocks/productsData.json'
+import products from '../Mocks/productsData.json'
 import { useParams } from 'react-router-dom'
 // import ModalItemDetail from './ModalItemDetail'
 

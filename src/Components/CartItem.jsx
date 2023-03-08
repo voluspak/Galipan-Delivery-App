@@ -30,15 +30,15 @@ const CartItem = () => {
                 COP{prod.price}K
               </td>
               <td>
-                <button onClick={removeOneFromCart} className='p-2 font-bold text-2xl text-red-700 active:text-red-500'>-</button>
+                <button onClick={() => removeOneFromCart(prod)} className='p-2 font-bold text-2xl text-red-700 active:text-red-500'>-</button>
                 <span>{prod.cant}</span>
-                <button onClick={addToCart} className='p-2 font-bold text-green-700 active:text-green-500 text-lg'>+</button>
+                <button onClick={() => addToCart(prod)} className='p-2 font-bold text-green-700 active:text-green-500 text-lg'>+</button>
               </td>
               <td>
                 <span>COP{prod.price}K</span>
               </td>
               <td>
-                <button onClick={deleteFromCart} className='p-2 text-2xl text-red-700 active:text-red-500'><RiDeleteBin5Line /></button>
+                <button onClick={() => deleteFromCart(prod)} className='p-2 text-2xl text-red-700 active:text-red-500'><RiDeleteBin5Line /></button>
               </td>
             </tr>
           ))}
