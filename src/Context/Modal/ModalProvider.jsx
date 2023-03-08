@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { ModalContext } from './modalContext'
 
 const ModalProvider = ({ children }) => {
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(true)
   return (
     <ModalContext.Provider value={{ show, setShow }}>
       {children}

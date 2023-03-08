@@ -14,7 +14,13 @@ module.exports = {
         18: '70px'
       },
       minHeight: {
-        '2/4': '50%'
+        modal: '18.75rem'
+      },
+      maxHeight: {
+        modal: '31.25rem'
+      },
+      minWidth: {
+        modal: '30rem'
       }
     }
   },
