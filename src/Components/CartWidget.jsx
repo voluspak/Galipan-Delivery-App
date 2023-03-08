@@ -1,17 +1,12 @@
-import React, { useState, useEffect, useId } from 'react'
+import React from 'react'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
-import { useCart } from '../Hooks/useCart'
+import useCartWidget from '../Hooks/useCartWidget'
+
 import { useModal } from '../Hooks/useModal'
 
 const CartWidget = () => {
-  const { cart } = useCart()
   const { setShow, show } = useModal()
-  const [total, setTotal] = useState(0)
-  const modalCheckbox = useId()
-
-  useEffect(() => {
-    setTotal(cart.reduce((prev, act) => prev + act.cant, 0))
-  }, [cart])
+  const { total, modalCheckbox } = useCartWidget()
 
   return (
     <div>
