@@ -1,9 +1,12 @@
 import React from 'react'
 import { useCart } from '../Hooks/useCart'
 import { RiDeleteBin5Line } from 'react-icons/ri'
+import useTotals from '../Hooks/useTotals'
 
 const CartItem = () => {
   const { addToCart, removeOneFromCart, deleteFromCart, cart } = useCart()
+  const { totalItems, pay } = useTotals()
+
   return (
     <>
       <table className='w-full md:table-auto table-fixed text-center'>
@@ -35,7 +38,7 @@ const CartItem = () => {
                 <button onClick={() => addToCart(prod)} className='p-2 font-bold text-green-700 active:text-green-500 text-lg'>+</button>
               </td>
               <td>
-                <span>COP{prod.price}K</span>
+                <span>COP{prod.price * prod.cant}K</span>
               </td>
               <td>
                 <button onClick={() => deleteFromCart(prod)} className='p-2 text-2xl text-red-700 active:text-red-500'><RiDeleteBin5Line /></button>
@@ -48,8 +51,8 @@ const CartItem = () => {
             <td> </td>
             <td> </td>
             <td> </td>
-            <td><strong>CANT TOTAL</strong></td>
-            <td><strong>TOTAL</strong></td>
+            <td><strong>{totalItems}unid.</strong></td>
+            <td><strong>COP{pay}K</strong></td>
             <td> </td>
           </tr>
         </tfoot>
