@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import CartProvider from './Context/CartProvider'
 import ModalCart from './Components/ModalCart'
 import { useModal } from './Hooks/useModal'
+import AdminLogin from './Components/AdminLogin'
 
 const App = () => {
   const { show } = useModal()
@@ -25,6 +26,7 @@ const App = () => {
           <Routes>
             <Route path='/' element={<ListContainer />} />
             <Route path='category/:category' element={<ListContainer />} />
+            <Route path='adminlogin' element={<AdminLogin />} />
           </Routes>
         </main>
       </CartProvider>
