@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
-import login from '../Services/login'
+import login from '../../Services/login'
 import Notification from './Notification'
 
-const AdminLogin = () => {
+const LoginForm = ({ setUser }) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [user, setUser] = useState('')
   const [errorMessage, setErrorMessage] = useState(null)
 
   async function handleLogin (event) {
@@ -43,4 +42,4 @@ const AdminLogin = () => {
   )
 }
 
-export default AdminLogin
+export default LoginForm

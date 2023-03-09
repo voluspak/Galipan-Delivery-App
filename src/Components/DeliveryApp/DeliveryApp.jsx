@@ -1,10 +1,10 @@
 import React from 'react'
-import CartProvider from '../Context/CartProvider'
+import CartProvider from '../../Context/CartProvider'
 import Navbar from './Navbar'
 import ModalCart from './ModalCart'
 import { Route, Routes } from 'react-router-dom'
 import ListContainer from './ListContainer'
-import { useModal } from '../Hooks/useModal'
+import { useModal } from '../../Hooks/useModal'
 
 const DeliveryApp = () => {
   const { show } = useModal()

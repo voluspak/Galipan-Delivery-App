@@ -1,6 +1,6 @@
 import React from 'react'
 import Counter from './Counter'
-import { useCart } from '../Hooks/useCart'
+import { useCart } from '../../Hooks/useCart'
 
 const ProductsList = ({ prods }) => {
   const { cart, addToCart, removeOneFromCart } = useCart()

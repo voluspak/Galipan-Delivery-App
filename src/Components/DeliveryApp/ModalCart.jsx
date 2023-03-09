@@ -1,7 +1,7 @@
 import React from 'react'
 import { GrClose } from 'react-icons/gr'
-import { useCart } from '../Hooks/useCart'
-import { useModal } from '../Hooks/useModal'
+import { useCart } from '../../Hooks/useCart'
+import { useModal } from '../../Hooks/useModal'
 import CartItem from './CartItem'
 
 const ModalCart = () => {

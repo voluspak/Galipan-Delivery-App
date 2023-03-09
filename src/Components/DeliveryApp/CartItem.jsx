@@ -1,7 +1,7 @@
 import React from 'react'
-import { useCart } from '../Hooks/useCart'
+import { useCart } from '../../Hooks/useCart'
 import { RiDeleteBin5Line } from 'react-icons/ri'
-import useTotals from '../Hooks/useTotals'
+import useTotals from '../../Hooks/useTotals'
 
 const CartItem = () => {
   const { addToCart, removeOneFromCart, deleteFromCart, cart } = useCart()

@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import AppManagement from './Components/AppManagement'
-import DeliveryApp from './Components/DeliveryApp'
+import AppManagement from './Components/AppManagement/AppManagement'
+import DeliveryApp from './Components/DeliveryApp/DeliveryApp'
 
 const App = () => {
   return (

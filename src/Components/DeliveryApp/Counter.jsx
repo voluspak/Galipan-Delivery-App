@@ -1,6 +1,6 @@
 import React from 'react'
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai'
-import itemSearch from '../Services/findItem'
+import itemSearch from '../../Services/findItem'
 
 const Counter = ({ id, cart, addToCart, removeOneFromCart }) => {
   const { quantityOfItemInCart: itemQuantity } = itemSearch(id, cart)

@@ -1,6 +1,6 @@
 import React from 'react'
 import ProductsList from './ProductsList'
-import useProducts from '../Hooks/useProducts'
+import useProducts from '../../Hooks/useProducts'
 import Loader from './Loader'
 
 const ListContainer = () => {

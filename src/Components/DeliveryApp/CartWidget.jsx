@@ -1,8 +1,8 @@
 import React from 'react'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
-import useCartWidget from '../Hooks/useCartWidget'
+import useCartWidget from '../../Hooks/useCartWidget'
 
-import { useModal } from '../Hooks/useModal'
+import { useModal } from '../../Hooks/useModal'
 
 const CartWidget = () => {
   const { setShow, show } = useModal()
