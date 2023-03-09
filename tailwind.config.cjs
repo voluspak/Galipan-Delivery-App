@@ -21,6 +21,9 @@ module.exports = {
       },
       minWidth: {
         modal: '30rem'
+      },
+      height: {
+        30: '120px'
       }
     }
   },

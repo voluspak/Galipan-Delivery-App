@@ -3,7 +3,7 @@ import LoginForm from './LoginForm'
 import GeneralManagementMenu from './GeneralManagementMenu'
 
 const AppManagement = () => {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(true)
 
   return (
     <>
