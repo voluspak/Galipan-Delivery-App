@@ -10,7 +10,7 @@ const App = () => {
       <Routes>
         <Route path='adminlogin' element={<AppManagement />} />
         <Route path='agregarProducto' element={<AddingForm />} />
-        <Route path='/' element={<DeliveryApp />} />
+        <Route index element={<DeliveryApp />} />
       </Routes>
     </BrowserRouter>
   )

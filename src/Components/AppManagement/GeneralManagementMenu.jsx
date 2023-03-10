@@ -22,6 +22,7 @@ const GeneralManagementMenu = () => {
         <Link to='/disponibilidadProducto' className='p-5 w-96 rounded-xl bg-white text-center shadow-md bg-opacity-50 backdrop-blur-sm'>
           <h2 className='text-amber-700 text-4xl '>Cambiar disponibilidad de productos</h2>
         </Link>
+
       </div>
     </div>
   )
