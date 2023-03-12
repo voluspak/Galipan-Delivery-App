@@ -1,26 +1,9 @@
-import React, { useState } from 'react'
-import login from '../../Services/login'
+import React from 'react'
 import Notification from './Notification'
+import useUser from '../../Hooks/useUser'
 
-const LoginForm = ({ setUser }) => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [errorMessage, setErrorMessage] = useState(null)
-
-  async function handleLogin (event) {
-    event.preventDefault()
-
-    try {
-      const user = await login({ username, password })
-      console.log(user)
-      setUser(user)
-      setPassword('')
-      setUsername('')
-    } catch (error) {
-      setErrorMessage('Wrong Credentials')
-      setTimeout(() => setErrorMessage(null), 5000)
-    }
-  }
+const LoginForm = () => {
+  const { handleLogin, errorMessage, username, password, setUsername, setPassword } = useUser()
 
   return (
     <div className='bg-black backdrop-blur-sm fixed z-10 top-0 left-0 w-full h-full grid place-items-center bg-opacity-50'>

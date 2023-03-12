@@ -2,8 +2,10 @@ import axios from 'axios'
 
 const baseUrl = 'http://localhost:3001/api/products'
 
-async function createNewProduct () {
-
+export function createNewProduct (productToAdd) {
+  axios.post(baseUrl, productToAdd)
+    .then(resp => {
+      const { data } = resp
+      return data
+    })
 }
-
-export default createNewProduct

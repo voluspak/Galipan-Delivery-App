@@ -4,8 +4,11 @@ import { BiArrowBack } from 'react-icons/bi'
 import { Link } from 'react-router-dom'
 import { useFile } from '../../Hooks/useFile'
 import ErrorFieldsNotificacion from './ErrorFieldsNotificacion'
+import { createNewProduct } from '../../Services/createNewProduct'
+import useUser from '../../Hooks/useUser'
 
 const AddingForm = () => {
+  const { user } = useUser()
   const { handleFile, preview, selectedFile } = useFile()
   const [fileSizeError, setFileSizeError] = useState('')
   const [errorFields, setErrorFields] = useState('')
@@ -14,6 +17,7 @@ const AddingForm = () => {
     e.preventDefault()
     const prodToAdd = Object.fromEntries(new window.FormData(e.target))
     const MAX_FILE_SIZE = 3000000
+    const { token } = user
 
     if (prodToAdd.length < 5) {
       setErrorFields('No pueden haber campos vacíos')
@@ -24,7 +28,14 @@ const AddingForm = () => {
       setTimeout(() => setFileSizeError('La imagen debe ser menor a 3MB'), 3000)
       return
     }
-    console.log(prodToAdd)
+
+    createNewProduct(prodToAdd, { token })
+      .then((result) => {
+        console.log('Producto agregado correctamente')
+        console.log(result)
+      }).catch((err) => {
+        console.log(err)
+      })
   }
 
   return (
