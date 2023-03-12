@@ -1,24 +1,21 @@
 import { useState } from 'react'
 
-export function useFile () {
+export function useFile (e) {
   const [fileSizeError, setFileSizeError] = useState('')
-  const [imgFile, setImgFile] = useState()
-  const [resetValue, setResetValue] = useState('')
-
+  const [resetValue, setResetValue] = useState()
+  let imgFile
   function handleFile (e) {
-    const img = e.target.files[0]
-    console.log(img.size)
-    if (img?.size > 3000000) {
+    imgFile = e.target.files[0]
+    if (imgFile?.size > 3000000) {
       setFileSizeError('La imagen debe tener un tamaño menor a 3MB')
-      setResetValue('')
+      setResetValue({})
       setTimeout(() => {
         setFileSizeError('')
       }, 5000)
     } else {
-      setImgFile(img)
-      console.log(imgFile)
+      return imgFile
     }
   }
 
-  return { fileSizeError, resetValue, handleFile }
+  return { fileSizeError, resetValue, handleFile, imgFile }
 }
