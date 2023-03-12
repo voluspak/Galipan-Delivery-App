@@ -1,16 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import LoginForm from './LoginForm'
 import GeneralManagementMenu from './GeneralManagementMenu'
-import useUser from '../../Hooks/useUser'
 
 const AppManagement = () => {
-  const { user } = useUser()
+  const [user, setUser] = useState(true)
 
   return (
     <>
       {user
         ? <GeneralManagementMenu />
-        : <LoginForm />}
+        : <LoginForm setUser={setUser} />}
     </>
   )
 }

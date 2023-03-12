@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom'
 import { useFile } from '../../Hooks/useFile'
 import ErrorFieldsNotificacion from './ErrorFieldsNotificacion'
 import { createNewProduct } from '../../Services/createNewProduct'
-import useUser from '../../Hooks/useUser'
+// import useUser from '../../Hooks/useUser'
 
 const AddingForm = () => {
-  const { user } = useUser()
+  // const { user } = useUser()
   const { handleFile, preview, selectedFile } = useFile()
   const [fileSizeError, setFileSizeError] = useState('')
   const [errorFields, setErrorFields] = useState('')
@@ -16,8 +16,11 @@ const AddingForm = () => {
   function handleAddingNewProd (e) {
     e.preventDefault()
     const prodToAdd = Object.fromEntries(new window.FormData(e.target))
+    const imgFile = prodToAdd.get('img')
+    const urlImage = URL.createObjectURL(imgFile)
+    prodToAdd.set('img', urlImage)
     const MAX_FILE_SIZE = 3000000
-    const { token } = user
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MGIwM2YyOGM3ZDRkYmU4MjUxMWI1MiIsInVzZXJuYW1lIjoiYWRtaW4uZ2FsaXBhbi5jbyIsImlhdCI6MTY3ODY0OTkwNCwiZXhwIjoxNjgxMjQxOTA0fQ.xRxmyWMLpbK5iicy7DumEfRrDeDJRkN00GjnIxMsB0w'
 
     if (prodToAdd.length < 5) {
       setErrorFields('No pueden haber campos vacíos')
@@ -29,11 +32,12 @@ const AddingForm = () => {
       return
     }
 
-    createNewProduct(prodToAdd, { token })
+    createNewProduct(prodToAdd, token)
       .then((result) => {
         console.log('Producto agregado correctamente')
         console.log(result)
       }).catch((err) => {
+        console.log('No se pudo crear el elemento')
         console.log(err)
       })
   }

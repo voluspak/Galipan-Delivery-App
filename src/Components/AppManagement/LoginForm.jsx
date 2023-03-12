@@ -2,8 +2,8 @@ import React from 'react'
 import Notification from './Notification'
 import useUser from '../../Hooks/useUser'
 
-const LoginForm = () => {
-  const { handleLogin, errorMessage, username, password, setUsername, setPassword } = useUser()
+const LoginForm = ({ setUser }) => {
+  const { handleLogin, errorMessage, username, password, setUsername, setPassword } = useUser({ setUser })
 
   return (
     <div className='bg-black backdrop-blur-sm fixed z-10 top-0 left-0 w-full h-full grid place-items-center bg-opacity-50'>
