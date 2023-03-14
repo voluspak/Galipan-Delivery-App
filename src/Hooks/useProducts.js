@@ -1,21 +1,19 @@
 import { useState, useEffect, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
-// import products from '../Mocks/productsData.json'
 import { getProducts } from '../Services/getProducts'
 
 export default function useProducts () {
   const [prods, setProds] = useState()
   const { category } = useParams()
 
-  useMemo(async () => {
-    const data = await getProducts()
-    console.log('memo render')
-    setProds(data)
+  useMemo(() => {
+    getProducts()
+      .then(resp => setProds(resp))
+      .catch(er => console.log(er))
   }, [])
   useEffect(() => {
     async function filterCategories () {
       const products = await getProducts()
-      console.log(category)
       if (category) {
         const filteredProd = products.filter(prod => prod.category === category)
         console.log(filteredProd)

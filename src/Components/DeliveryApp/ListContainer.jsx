@@ -5,7 +5,7 @@ import Loader from './Loader'
 
 const ListContainer = () => {
   const { prods } = useProducts()
-  console.log(prods)
+
   return !prods
     ? <Loader />
     : <ProductsList prods={prods} />
