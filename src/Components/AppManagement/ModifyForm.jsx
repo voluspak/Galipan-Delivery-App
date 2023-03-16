@@ -10,6 +10,14 @@ import ProductSettings from './ProductSettings'
 const ModifyForm = () => {
   const { prods } = useProducts()
   const [showSetting, setShowSetting] = useState(false)
+  const [product, setProduct] = useState(null)
+
+  const toggleSettings = () => setShowSetting(!showSetting)
+
+  const setCurrentProduct = item => {
+    setProduct(item)
+    toggleSettings()
+  }
 
   if (!prods) {
     return (<Loader />)
@@ -31,15 +39,21 @@ const ModifyForm = () => {
 
                     <span className=' w-28 text-sm text-center font-bold'>{item.name}</span>
                     <label htmlFor={item.id} className='bg-gray-400 cursor-pointer w-10 py-1 rounded-md'><IoMdSettings className='mx-auto' /></label>
-                    <input onChange={() => setShowSetting(!showSetting)} id={item.id} type='checkbox' hidden />
+                    <input onChange={() => setCurrentProduct(item)} id={item.id} type='checkbox' hidden />
 
-                    <button className='bg-red-500 w-10 py-1 rounded-md'><RiDeleteBin5Line className='mx-auto text-white' /></button>
+                    <button className='bg-red-500 w-10 py-1 rounded-md'>
+                      <RiDeleteBin5Line className='mx-auto text-white' />
+                    </button>
                   </div>
-                  <ProductSettings {...item} show={showSetting} setShow={setShowSetting} />
                 </div>
               ))}
+              {showSetting && (
+                <ProductSettings
+                  {...product}
+                  setShow={toggleSettings}
+                />
+              )}
             </div>
-
           </section>
         </main>
       </>
