@@ -28,9 +28,11 @@ const ModifyForm = () => {
                 <div key={item.id} className='flex h-30 w-60 justify-evenly items-center bg-white rounded-lg shadow-lg'>
                   <img src={item.img} alt={item.name} className='rounded-md w-24 h-24 object-cover shadow-md' />
                   <div className='flex flex-col items-center justify-center gap-3'>
+
                     <span className=' w-28 text-sm text-center font-bold'>{item.name}</span>
                     <label htmlFor={item.id} className='bg-gray-400 cursor-pointer w-10 py-1 rounded-md'><IoMdSettings className='mx-auto' /></label>
                     <input onChange={() => setShowSetting(!showSetting)} id={item.id} type='checkbox' hidden />
+
                     <button className='bg-red-500 w-10 py-1 rounded-md'><RiDeleteBin5Line className='mx-auto text-white' /></button>
                   </div>
                   <ProductSettings {...item} show={showSetting} setShow={setShowSetting} />
