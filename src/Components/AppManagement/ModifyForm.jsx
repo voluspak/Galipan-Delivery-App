@@ -6,6 +6,7 @@ import { IoMdSettings } from 'react-icons/io'
 import useProducts from '../../Hooks/useProducts'
 import Loader from '../DeliveryApp/Loader'
 import ProductSettings from './ProductSettings'
+import { deleteProduct } from '../../Services/deleteProduct'
 
 const ModifyForm = () => {
   const { prods } = useProducts()
@@ -17,6 +18,30 @@ const ModifyForm = () => {
   const setCurrentProduct = item => {
     setProduct(item)
     toggleSettings()
+  }
+
+  function handleDelete (product) {
+    const { id, name, unid, price } = product
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MGIwM2YyOGM3ZDRkYmU4MjUxMWI1MiIsInVzZXJuYW1lIjoiYWRtaW4uZ2FsaXBhbi5jbyIsImlhdCI6MTY3ODY0OTkwNCwiZXhwIjoxNjgxMjQxOTA0fQ.xRxmyWMLpbK5iicy7DumEfRrDeDJRkN00GjnIxMsB0w'
+
+    const removeOk = window.confirm(`
+      ¿Estas seguro de querer eliminar este producto? \n
+      ${name} \n
+      COP${price}k \n
+      ${unid}
+      ID: ${id}
+      `)
+
+    if (removeOk) {
+      try {
+        window.alert(`${name}(ID: ${id}) \n Eliminado con éxito`)
+        const removeProduct = deleteProduct(id, token)
+        return removeProduct
+      } catch (error) {
+        console.error(error)
+        throw new Error('Hubo problemas al eliminar el producto')
+      }
+    }
   }
 
   if (!prods) {
@@ -38,10 +63,12 @@ const ModifyForm = () => {
                   <div className='flex flex-col items-center justify-center gap-3'>
 
                     <span className=' w-28 text-sm text-center font-bold'>{item.name}</span>
-                    <label htmlFor={item.id} className='bg-gray-400 cursor-pointer w-10 py-1 rounded-md'><IoMdSettings className='mx-auto' /></label>
+                    <label htmlFor={item.id} className='bg-gray-400 cursor-pointer w-10 py-1 rounded-md'>
+                      <IoMdSettings className='mx-auto' />
+                    </label>
                     <input onChange={() => setCurrentProduct(item)} id={item.id} type='checkbox' hidden />
 
-                    <button className='bg-red-500 w-10 py-1 rounded-md'>
+                    <button onClick={() => handleDelete(item)} className='bg-red-500 w-10 py-1 rounded-md'>
                       <RiDeleteBin5Line className='mx-auto text-white' />
                     </button>
                   </div>
