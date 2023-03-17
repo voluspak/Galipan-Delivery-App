@@ -1,16 +1,18 @@
 import React from 'react'
-import { modifyProduct } from '../../Services/modifyProducts'
+import { updateProduct } from '../../Services/products'
 import { GrClose } from 'react-icons/gr'
+import useUser from '../../Hooks/useUser'
 
 const ProductSettings = ({ id, name, setShow }) => {
+  const { user } = useUser()
+
   function handleModifyForm (e, id) {
     e.preventDefault()
 
     const prodToUpdate = Object.fromEntries(new FormData(e.target))
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MGIwM2YyOGM3ZDRkYmU4MjUxMWI1MiIsInVzZXJuYW1lIjoiYWRtaW4uZ2FsaXBhbi5jbyIsImlhdCI6MTY3ODY0OTkwNCwiZXhwIjoxNjgxMjQxOTA0fQ.xRxmyWMLpbK5iicy7DumEfRrDeDJRkN00GjnIxMsB0w'
-
+    const { token } = user
     try {
-      const newProd = modifyProduct(id, prodToUpdate, token)
+      const newProd = updateProduct(id, prodToUpdate, token)
       console.log(`Producto id: ${id} \n Modificado con éxito`)
       return newProd
     } catch (error) {

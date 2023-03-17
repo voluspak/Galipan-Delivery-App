@@ -1,17 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 import LoginForm from './LoginForm'
 import GeneralManagementMenu from './GeneralManagementMenu'
+import useUser from '../../Hooks/useUser'
 
 const AppManagement = () => {
-  const [user, setUser] = useState(true)
+  const { user } = useUser()
 
-  return (
-    <>
-      {user
-        ? <GeneralManagementMenu />
-        : <LoginForm setUser={setUser} />}
-    </>
-  )
+  if (!user) {
+    return (<LoginForm />)
+  } else {
+    return (<GeneralManagementMenu />)
+  }
 }
 
 export default AppManagement

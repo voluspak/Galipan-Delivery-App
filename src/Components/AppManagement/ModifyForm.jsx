@@ -7,11 +7,12 @@ import { IoMdSettings } from 'react-icons/io'
 import useProducts from '../../Hooks/useProducts'
 import Loader from '../DeliveryApp/Loader'
 import ProductSettings from './ProductSettings'
-import { deleteProduct } from '../../Services/deleteProduct'
-import { modifyProduct } from '../../Services/modifyProducts'
+import { deleteProduct, updateProduct } from '../../Services/products'
+import useUser from '../../Hooks/useUser'
 
 const ModifyForm = () => {
   const { prods } = useProducts()
+  const { user } = useUser()
   const [showSetting, setShowSetting] = useState(false)
   const [product, setProduct] = useState(null)
   const [displayProd, setDisplayProd] = useState()
@@ -27,7 +28,7 @@ const ModifyForm = () => {
 
   function handleDelete (product) {
     const { id, name, unid, price } = product
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MGIwM2YyOGM3ZDRkYmU4MjUxMWI1MiIsInVzZXJuYW1lIjoiYWRtaW4uZ2FsaXBhbi5jbyIsImlhdCI6MTY3ODY0OTkwNCwiZXhwIjoxNjgxMjQxOTA0fQ.xRxmyWMLpbK5iicy7DumEfRrDeDJRkN00GjnIxMsB0w'
+    const { token } = user
 
     const removeOk = window.confirm(`
       ¿Estas seguro de querer eliminar este producto? \n
@@ -64,10 +65,10 @@ const ModifyForm = () => {
       setTextColorDisplay('text-red-500')
     }
 
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MGIwM2YyOGM3ZDRkYmU4MjUxMWI1MiIsInVzZXJuYW1lIjoiYWRtaW4uZ2FsaXBhbi5jbyIsImlhdCI6MTY3ODY0OTkwNCwiZXhwIjoxNjgxMjQxOTA0fQ.xRxmyWMLpbK5iicy7DumEfRrDeDJRkN00GjnIxMsB0w'
+    const { token } = user
 
     try {
-      const newProd = modifyProduct(product.id, product, token)
+      const newProd = updateProduct(product.id, product, token)
       return newProd
     } catch (error) {
       console.log(error)

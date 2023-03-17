@@ -3,13 +3,13 @@ import { BiArrowBack } from 'react-icons/bi'
 import { Link } from 'react-router-dom'
 import { useImage } from '../../Hooks/useImage'
 import ErrorFieldsNotificacion from './ErrorFieldsNotificacion'
-import { createNewProduct } from '../../Services/createNewProduct'
+import { createProduct } from '../../Services/products'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-// import useUser from '../../Hooks/useUser'
+import useUser from '../../Hooks/useUser'
 
 const AddingForm = () => {
-  // const { user } = useUser()
+  const { user } = useUser()
   const { handleImage, preview, imgUrl } = useImage()
   const [errorFields, setErrorFields] = useState('')
 
@@ -28,7 +28,7 @@ const AddingForm = () => {
   function handleAddingNewProd (e) {
     e.preventDefault()
     const prodToAdd = Object.fromEntries(new window.FormData(e.target))
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MGIwM2YyOGM3ZDRkYmU4MjUxMWI1MiIsInVzZXJuYW1lIjoiYWRtaW4uZ2FsaXBhbi5jbyIsImlhdCI6MTY3ODY0OTkwNCwiZXhwIjoxNjgxMjQxOTA0fQ.xRxmyWMLpbK5iicy7DumEfRrDeDJRkN00GjnIxMsB0w'
+    const { token } = user
     prodToAdd.img = imgUrl
 
     if (prodToAdd.length < 5) {
@@ -39,7 +39,7 @@ const AddingForm = () => {
     }
 
     try {
-      const createProdReq = createNewProduct(prodToAdd, token)
+      const createProdReq = createProduct(prodToAdd, token)
       notify('¡Producto creado exitosamente!')
       return createProdReq
     } catch (error) {

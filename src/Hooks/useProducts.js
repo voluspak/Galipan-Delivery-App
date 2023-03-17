@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
-import { getProducts } from '../Services/getProducts'
+import { getProducts } from '../Services/products'
 
 export default function useProducts () {
   const [prods, setProds] = useState()
