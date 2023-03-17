@@ -1,15 +1,17 @@
 import { useState, useEffect } from 'react'
 
-export function useImage (e) {
+export function useImage () {
   const [imgUrl, setImgUrl] = useState('')
   const [preview, setPreview] = useState('')
 
   function handleImage (e) {
     if (!e.target.value) {
       setImgUrl(undefined)
-      return
+    } else {
+      const url = e.target.value
+      const newwUrl = url.replace('?dl=0', '?raw=1')
+      setImgUrl(newwUrl)
     }
-    setImgUrl(e.target.value)
   }
 
   useEffect(() => {

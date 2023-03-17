@@ -12,7 +12,6 @@ const AddingForm = () => {
   // const { user } = useUser()
   const { handleImage, preview, imgUrl } = useImage()
   const [errorFields, setErrorFields] = useState('')
-  // const VISUALIZE_QUERY = '?raw=1'
 
   function notify (message) {
     toast(message, {
@@ -30,6 +29,7 @@ const AddingForm = () => {
     e.preventDefault()
     const prodToAdd = Object.fromEntries(new window.FormData(e.target))
     const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MGIwM2YyOGM3ZDRkYmU4MjUxMWI1MiIsInVzZXJuYW1lIjoiYWRtaW4uZ2FsaXBhbi5jbyIsImlhdCI6MTY3ODY0OTkwNCwiZXhwIjoxNjgxMjQxOTA0fQ.xRxmyWMLpbK5iicy7DumEfRrDeDJRkN00GjnIxMsB0w'
+    prodToAdd.img = imgUrl
 
     if (prodToAdd.length < 5) {
       setErrorFields('No pueden haber campos vacíos')
