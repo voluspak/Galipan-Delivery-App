@@ -2,16 +2,21 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { BiArrowBack } from 'react-icons/bi'
 import { RiDeleteBin5Line } from 'react-icons/ri'
+import { FaPowerOff } from 'react-icons/fa'
 import { IoMdSettings } from 'react-icons/io'
 import useProducts from '../../Hooks/useProducts'
 import Loader from '../DeliveryApp/Loader'
 import ProductSettings from './ProductSettings'
 import { deleteProduct } from '../../Services/deleteProduct'
+import { modifyProduct } from '../../Services/modifyProducts'
 
 const ModifyForm = () => {
   const { prods } = useProducts()
   const [showSetting, setShowSetting] = useState(false)
   const [product, setProduct] = useState(null)
+  const [displayProd, setDisplayProd] = useState()
+  const [textColorDisplay, setTextColorDisplay] = useState('text-green-500')
+  const [borderColorDisplay, setBorderColorDisplay] = useState('border-green-500')
 
   const toggleSettings = () => setShowSetting(!showSetting)
 
@@ -44,6 +49,32 @@ const ModifyForm = () => {
     }
   }
 
+  function handleDisplay (product) {
+    setDisplayProd(product.display)
+    setDisplayProd(!displayProd)
+    product.display = displayProd
+
+    console.log(product.name, product.display)
+
+    if (displayProd) {
+      setBorderColorDisplay('border-green-500')
+      setTextColorDisplay('text-green-500')
+    } else {
+      setBorderColorDisplay('border-red-500')
+      setTextColorDisplay('text-red-500')
+    }
+
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MGIwM2YyOGM3ZDRkYmU4MjUxMWI1MiIsInVzZXJuYW1lIjoiYWRtaW4uZ2FsaXBhbi5jbyIsImlhdCI6MTY3ODY0OTkwNCwiZXhwIjoxNjgxMjQxOTA0fQ.xRxmyWMLpbK5iicy7DumEfRrDeDJRkN00GjnIxMsB0w'
+
+    try {
+      const newProd = modifyProduct(product.id, product, token)
+      return newProd
+    } catch (error) {
+      console.log(error)
+      throw new Error('Hubo un problema al modificar el producto')
+    }
+  }
+
   if (!prods) {
     return (<Loader />)
   } else {
@@ -58,18 +89,24 @@ const ModifyForm = () => {
 
             <div className=' w-full h-full grid grid-cols-autoFit place-items-center'>
               {prods.map(item => (
-                <div key={item.id} className='flex h-30 w-60 justify-evenly items-center bg-white rounded-lg shadow-lg'>
+                <div key={item.id} className='flex h-30 w-64 justify-evenly items-center bg-white rounded-lg shadow-lg'>
                   <img src={item.img} alt={item.name} className='rounded-md w-24 h-24 object-cover shadow-md' />
                   <div className='flex flex-col items-center justify-center gap-3'>
 
                     <span className=' w-28 text-sm text-center font-bold'>{item.name}</span>
-                    <label htmlFor={item.id} className='bg-gray-400 cursor-pointer w-10 py-1 rounded-md'>
-                      <IoMdSettings className='mx-auto' />
-                    </label>
-                    <input onChange={() => setCurrentProduct(item)} id={item.id} type='checkbox' hidden />
+                    <div className='flex gap-2'>
+                      <label htmlFor={item.id} role='button' className='bg-gray-400 cursor-pointer w-7 py-1 rounded-md'>
+                        <IoMdSettings className=' text-sm mx-auto' />
+                      </label>
+                      <input onChange={() => setCurrentProduct(item)} id={item.id} type='checkbox' hidden />
 
-                    <button onClick={() => handleDelete(item)} className='bg-red-500 w-10 py-1 rounded-md'>
-                      <RiDeleteBin5Line className='mx-auto text-white' />
+                      <button onClick={() => handleDelete(item)} className='bg-red-500 w-7 py-1 rounded-md'>
+                        <RiDeleteBin5Line className=' text-sm mx-auto text-white' />
+                      </button>
+                    </div>
+
+                    <button onClick={() => handleDisplay(item)} className={`bg-white border ${borderColorDisplay} w-7 py-1 rounded-md`}>
+                      <FaPowerOff className={` text-sm mx-auto  ${textColorDisplay}`} />
                     </button>
                   </div>
                 </div>

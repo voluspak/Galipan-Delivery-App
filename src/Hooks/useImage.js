@@ -9,8 +9,13 @@ export function useImage () {
       setImgUrl(undefined)
     } else {
       const url = e.target.value
-      const newwUrl = url.replace('?dl=0', '?raw=1')
-      setImgUrl(newwUrl)
+      const hasDL = url.includes('?dl=0')
+      if (hasDL) {
+        const newwUrl = url.replace('?dl=0', '?raw=1')
+        setImgUrl(newwUrl)
+      } else {
+        setImgUrl(url)
+      }
     }
   }
 
