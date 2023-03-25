@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { BiArrowBack } from 'react-icons/bi'
 import { RiDeleteBin5Line } from 'react-icons/ri'
@@ -7,7 +7,7 @@ import { IoMdSettings } from 'react-icons/io'
 import useProducts from '../../Hooks/useProducts'
 import Loader from '../DeliveryApp/Loader'
 import ProductSettings from './ProductSettings'
-import { deleteProduct, updateProduct } from '../../Services/products'
+import { deleteProduct, patchProduct } from '../../Services/products'
 import useUser from '../../Hooks/useUser'
 
 const ModifyForm = () => {
@@ -15,7 +15,6 @@ const ModifyForm = () => {
   const { user } = useUser()
   const [showSetting, setShowSetting] = useState(false)
   const [product, setProduct] = useState(null)
-  const [displayProd, setDisplayProd] = useState()
 
   const enableColor = {
     text: 'text-green-500',
@@ -58,26 +57,26 @@ const ModifyForm = () => {
   }
 
   function changeDisplay (product) {
-    const updatedDisplayState = {
-      ...product,
-      display: displayProd
-    }
-    console.log(updatedDisplayState)
-    const { token } = user
+    const confirmDisplayChange = window.confirm(`Estas por cambiar la disponibilidad de ${product.name}. \n ¿Estas seguro?`)
 
-    try {
-      const newProd = updateProduct(product.id, updatedDisplayState, token)
-      console.log('Change setted')
-      return newProd
-    } catch (error) {
-      console.log(error)
-      throw new Error('Hubo un problema al modificar el producto')
+    if (confirmDisplayChange) {
+      const keyToUpdate = {
+        name: product.name,
+        display: !product.display
+      }
+      const { token } = user
+
+      try {
+        const newProd = patchProduct(product.id, keyToUpdate, token)
+        console.log('Change setted')
+        console.log(newProd)
+        return newProd
+      } catch (error) {
+        console.log(error)
+        throw new Error('Hubo un problema al modificar el producto')
+      }
     }
   }
-
-  useEffect(() => {
-    console.log('effect ejecutado')
-  }, [changeDisplay])
 
   if (!prods) {
     return (<Loader />)
@@ -110,7 +109,6 @@ const ModifyForm = () => {
                     </div>
 
                     <button
-                      onChange={() => setDisplayProd(!item.display)}
                       onClick={() => changeDisplay(item)}
                       className={`bg-white border ${item.display ? enableColor.border : disableColor.border} w-7 py-1 rounded-md`}
                     >
