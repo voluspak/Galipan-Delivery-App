@@ -30,7 +30,27 @@ async function updateProduct (id, modifications, token) {
 
   try {
     const newProd = axios.put(PUT_URL, modifications, config)
-    return await (await newProd).data
+    const { data } = newProd
+    return data
+  } catch (error) {
+    console.log(error)
+    throw new Error('No se pudo hacer la peticion correctamente')
+  }
+}
+
+async function patchProduct (id, keyToUpdate, token) {
+  const PATCH_URL = `${baseUrl}/${id}`
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `bearer ${token}`
+    }
+  }
+
+  try {
+    const newProd = axios.patch(PATCH_URL, keyToUpdate, config)
+    const { data } = newProd
+    return data
   } catch (error) {
     console.log(error)
     throw new Error('No se pudo hacer la peticion correctamente')
@@ -65,4 +85,4 @@ async function deleteProduct (id, token) {
   }
 }
 
-export { createProduct, updateProduct, getProducts, deleteProduct }
+export { createProduct, updateProduct, getProducts, deleteProduct, patchProduct }

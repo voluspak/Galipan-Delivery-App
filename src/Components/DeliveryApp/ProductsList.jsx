@@ -9,7 +9,7 @@ const ProductsList = ({ prods }) => {
     <section className=' w-4/5 grid grid-cols-autoFit gap-5 place-items-center'>
       {
       prods
-        .filter(prod => !prod.display)
+        .filter(prod => prod.display)
         .map(prod => (
           <div key={prod.id} className=' bg-orange-100 rounded w-64 h-96 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-transform'>
             <figure>

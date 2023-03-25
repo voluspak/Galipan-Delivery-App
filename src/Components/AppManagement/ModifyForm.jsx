@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { BiArrowBack } from 'react-icons/bi'
 import { RiDeleteBin5Line } from 'react-icons/ri'
@@ -16,8 +16,15 @@ const ModifyForm = () => {
   const [showSetting, setShowSetting] = useState(false)
   const [product, setProduct] = useState(null)
   const [displayProd, setDisplayProd] = useState()
-  const [textColorDisplay, setTextColorDisplay] = useState('text-green-500')
-  const [borderColorDisplay, setBorderColorDisplay] = useState('border-green-500')
+
+  const enableColor = {
+    text: 'text-green-500',
+    border: 'border-green-500'
+  }
+  const disableColor = {
+    text: 'text-red-500',
+    border: 'border-red-500'
+  }
 
   const toggleSettings = () => setShowSetting(!showSetting)
 
@@ -40,8 +47,8 @@ const ModifyForm = () => {
 
     if (removeOk) {
       try {
-        window.alert(`${name}(ID: ${id}) \n Eliminado con éxito`)
         const removeProduct = deleteProduct(id, token)
+        window.alert(`${name}(ID: ${id}) \n Eliminado con éxito`)
         return removeProduct
       } catch (error) {
         console.error(error)
@@ -50,31 +57,27 @@ const ModifyForm = () => {
     }
   }
 
-  function handleDisplay (product) {
-    setDisplayProd(product.display)
-    setDisplayProd(!displayProd)
-    product.display = displayProd
-
-    console.log(product.name, product.display)
-
-    if (displayProd) {
-      setBorderColorDisplay('border-green-500')
-      setTextColorDisplay('text-green-500')
-    } else {
-      setBorderColorDisplay('border-red-500')
-      setTextColorDisplay('text-red-500')
+  function changeDisplay (product) {
+    const updatedDisplayState = {
+      ...product,
+      display: displayProd
     }
-
+    console.log(updatedDisplayState)
     const { token } = user
 
     try {
-      const newProd = updateProduct(product.id, product, token)
+      const newProd = updateProduct(product.id, updatedDisplayState, token)
+      console.log('Change setted')
       return newProd
     } catch (error) {
       console.log(error)
       throw new Error('Hubo un problema al modificar el producto')
     }
   }
+
+  useEffect(() => {
+    console.log('effect ejecutado')
+  }, [changeDisplay])
 
   if (!prods) {
     return (<Loader />)
@@ -106,8 +109,12 @@ const ModifyForm = () => {
                       </button>
                     </div>
 
-                    <button onClick={() => handleDisplay(item)} className={`bg-white border ${borderColorDisplay} w-7 py-1 rounded-md`}>
-                      <FaPowerOff className={` text-sm mx-auto  ${textColorDisplay}`} />
+                    <button
+                      onChange={() => setDisplayProd(!item.display)}
+                      onClick={() => changeDisplay(item)}
+                      className={`bg-white border ${item.display ? enableColor.border : disableColor.border} w-7 py-1 rounded-md`}
+                    >
+                      <FaPowerOff className={` text-sm mx-auto  ${item.display ? enableColor.text : disableColor.text}`} />
                     </button>
                   </div>
                 </div>
