@@ -4,6 +4,7 @@ import useUpdateForm from '../../Hooks/useUpdateForm'
 
 const ProductSettings = ({ id, name, setShow }) => {
   const { handleUpdateForm } = useUpdateForm()
+
   return (
     <div className='fixed bg-opacity-10 backdrop-blur-sm bg-black  w-full h-full top-0 left-0 z-20 flex items-center justify-center'>
       <div className='bg-white w-4/5 h-4/5 rounded p-3 shadow-md relative'>
