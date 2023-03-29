@@ -4,11 +4,14 @@ import useProducts from '../../Hooks/useProducts'
 import Loader from './Loader'
 
 const ListContainer = () => {
-  const { prods } = useProducts()
+  const { prods, loader } = useProducts()
 
-  return !prods
-    ? <Loader />
-    : <ProductsList prods={prods} />
+  return (
+    <>
+      {loader && <Loader />}
+      <ProductsList prods={prods} />
+    </>
+  )
 }
 
 export default ListContainer

@@ -1,29 +1,32 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import { getProducts } from '../Services/products'
 
 export default function useProducts () {
-  const [prods, setProds] = useState()
+  const [prods, setProds] = useState([])
+  const [loader, setLoader] = useState(null)
   const { category } = useParams()
 
   useMemo(() => {
-    getProducts()
-      .then(resp => setProds(resp))
-      .catch(er => console.log(er))
-  }, [])
-  useEffect(() => {
     async function filterCategories () {
-      const products = await getProducts()
-      if (category) {
-        const filteredProd = products.filter(prod => prod.category === category)
-        console.log(filteredProd)
-        setProds(filteredProd)
-      } else {
-        setProds(products)
+      try {
+        setLoader(true)
+        const products = await getProducts()
+        if (category) {
+          const filteredProd = products.filter(prod => prod.category === category)
+
+          setProds(filteredProd)
+        } else {
+          setProds(products)
+        }
+      } catch (error) {
+        throw new Error('No se pudo filtrar la lista')
+      } finally {
+        setLoader(false)
       }
     }
 
     filterCategories()
   }, [category])
-  return { prods }
+  return { prods, loader }
 }
