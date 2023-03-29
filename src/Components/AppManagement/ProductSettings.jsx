@@ -1,33 +1,16 @@
 import React from 'react'
-import { updateProduct } from '../../Services/products'
 import { GrClose } from 'react-icons/gr'
-import useUser from '../../Hooks/useUser'
+import useUpdateForm from '../../Hooks/useUpdateForm'
 
 const ProductSettings = ({ id, name, setShow }) => {
-  const { user } = useUser()
-
-  function handleModifyForm (e, id) {
-    e.preventDefault()
-
-    const prodToUpdate = Object.fromEntries(new FormData(e.target))
-    const { token } = user
-    try {
-      const newProd = updateProduct(id, prodToUpdate, token)
-      console.log(`Producto id: ${id} \n Modificado con éxito`)
-      return newProd
-    } catch (error) {
-      console.log(error)
-      throw new Error('Hubo un problema al modificar el producto')
-    }
-  }
-
+  const { handleUpdateForm } = useUpdateForm()
   return (
     <div className='fixed bg-opacity-10 backdrop-blur-sm bg-black  w-full h-full top-0 left-0 z-20 flex items-center justify-center'>
       <div className='bg-white w-4/5 h-4/5 rounded p-3 shadow-md relative'>
         <h4 className='text-2xl font-bold text-orange-500'>Ajustes de {name}</h4>
         <button onClick={() => setShow()} className='absolute p-1 rounded-full top-5 right-5 hover:bg-slate-100 text-gray-500'><GrClose /></button>
 
-        <form encType='multipart/form-data' onSubmit={(e) => handleModifyForm(e, id)} className='gap-5 w-4/8 grid grid-cols-autoFit p-5'>
+        <form encType='multipart/form-data' onSubmit={(e) => handleUpdateForm(e, id)} className='gap-5 w-4/8 grid grid-cols-autoFit p-5'>
 
           <div className='flex flex-col gap-1 w-48'>
             <label className='text-amber-700 font-bold text-xl'>Nombre</label>
