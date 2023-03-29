@@ -38,7 +38,7 @@ export default function useUpdateMenu () {
     }
   }
 
-  function changeDisplay (product) {
+  async function changeDisplay (product) {
     const confirmDisplayChange = window
       .confirm(`Estas por cambiar la disponibilidad de ${product.name}. \n ¿Estas seguro?`)
 
@@ -50,9 +50,8 @@ export default function useUpdateMenu () {
       const { token } = user
 
       try {
-        const newProd = patchProduct(product.id, keyToUpdate, token)
-        console.log('Change setted')
-        console.log(newProd)
+        const newProd = await patchProduct(product.id, keyToUpdate, token)
+
         return newProd
       } catch (error) {
         console.log(error)

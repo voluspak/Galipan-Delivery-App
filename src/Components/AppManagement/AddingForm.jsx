@@ -1,53 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { BiArrowBack } from 'react-icons/bi'
 import { Link } from 'react-router-dom'
-import { useImage } from '../../Hooks/useImage'
 import ErrorFieldsNotificacion from './ErrorFieldsNotificacion'
-import { createProduct } from '../../Services/products'
-import { ToastContainer, toast } from 'react-toastify'
+import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import useUser from '../../Hooks/useUser'
+import useAddigForm from '../../Hooks/useAddingForm'
 
 const AddingForm = () => {
-  const { user } = useUser()
-  const { handleImage, preview, imgUrl } = useImage()
-  const [errorFields, setErrorFields] = useState('')
-
-  function notify (message) {
-    toast(message, {
-      autoClose: 5000,
-      position: 'bottom-right',
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      theme: 'light',
-      role: 'alert'
-    })
-  }
-
-  function handleAddingNewProd (e) {
-    e.preventDefault()
-    const prodToAdd = Object.fromEntries(new window.FormData(e.target))
-    const { token } = user
-    prodToAdd.img = imgUrl
-
-    if (prodToAdd.length < 5) {
-      setErrorFields('No pueden haber campos vacíos')
-
-      setTimeout(() => setErrorFields(''), 5000)
-      return
-    }
-
-    try {
-      const createProdReq = createProduct(prodToAdd, token)
-      notify('¡Producto creado exitosamente!')
-      return createProdReq
-    } catch (error) {
-      notify('Error al Crear el producto')
-      console.log(error)
-      throw new Error('Hubo un problema al crear el producto')
-    }
-  }
+  const { handleAddingNewProd, handleImage, preview, imgUrl, errorFields } = useAddigForm()
 
   return (
     <>
