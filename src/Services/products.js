@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseUrl = 'http://localhost:3001/api/products'
+const baseUrl = 'https://galipanapi.onrender.com/api/products'
 
 async function createProduct (productToAdd, token) {
   const config = {
