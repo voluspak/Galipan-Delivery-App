@@ -5,9 +5,9 @@ import CartWidget from './CartWidget'
 const Navbar = () => {
   return (
     <div className='fixed top-0 z-10 left-16 md:left-20 lg:left-34 bg-white w-4/5 flex container justify-around items-center shadow-md'>
-      <Link to='' className='cursor-pointer'>
+      <a href='https://galipan-pan-ivan-telleria.vercel.app/index.html' className='cursor-pointer'>
         <img src='./assets/Logo.jpg' title='Logo' className='h-auto w-56' />
-      </Link>
+      </a>
       <nav className='flex w-2/4 justify-around font-sans font-bold text-gray-500'>
         <Link to='/' className='text-2xl hover:text-orange-400 hover:rotate-3 transition-all'>Todos</Link>
         <Link to='/category/roles' className='text-2xl hover:text-orange-400 hover:rotate-3 transition-all'>Roles</Link>
