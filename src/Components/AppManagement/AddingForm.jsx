@@ -2,7 +2,6 @@ import React from 'react'
 import { BiArrowBack } from 'react-icons/bi'
 import { Link } from 'react-router-dom'
 import ErrorFieldsNotificacion from './ErrorFieldsNotificacion'
-import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import useAddigForm from '../../Hooks/useAddingForm'
 
@@ -52,7 +51,6 @@ const AddingForm = () => {
           <button type='submit' className='text-white bg-orange-600 rounded-md text-lg w-28 h-26 self-center'>Crear</button>
         </form>
       </main>
-      <ToastContainer />
     </>
   )
 }
